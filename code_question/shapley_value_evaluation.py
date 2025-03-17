@@ -18,8 +18,11 @@ def get_missing_steps(row, steps):
     missing_steps = []
     ##############################################################################
     ###Question 4: INSERT CODE HERE: Get missing steps as a tuple for each row.###
+    for step in steps:
+        if row[f'step{step}_missing'] == 0:
+            missing_steps.append(step)
     ##############################################################################
-    raise NotImplementedError("Get missing steps as a tuple for each row.")   
+    #raise NotImplementedError("Get missing steps as a tuple for each row.")   
     return tuple(sorted(missing_steps))
 
 def generate_all_subsets(steps):
