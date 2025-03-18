@@ -124,15 +124,17 @@ def main():
 
     ######################################################################################
     # Question 7.1: INSERT CODE HERE: Generate all possible subsets for the missing steps#
+    all_subsets_missing = generate_all_subsets(steps)
     ######################################################################################
     ###############################################
     # Question 7.2: INSERT CODE HERE: Compute v(S)#
+    v_S = compute_v_S(df, all_subsets_missing) # dictionary containing v_S for every possible subset (pi)
     ###############################################
     #############################################################
     # Question 7.3: INSERT CODE HERE: Compute the Shapley values#
     #############################################################
-    raise NotImplementedError("Implement the code to generate all possible subsets for the missing steps.")
-    raise NotImplementedError("Implement the code to compute v(S).")
+    #raise NotImplementedError("Implement the code to generate all possible subsets for the missing steps.")
+    #raise NotImplementedError("Implement the code to compute v(S).")
     raise NotImplementedError("Implement the code to compute the Shapley values.")
 if __name__ == "__main__":
     main()
