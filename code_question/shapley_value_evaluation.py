@@ -83,18 +83,24 @@ def compute_marginal_contributions(steps, v_S):
             idx_i = pi.index(i)
             #############################################################################################
             ###Question 6: INSERT CODE HERE: Retrieve S_i, S_i_union_i, S_i_sorted, S_i_union_i_sorted###
+            S_i = set(pi[:idx_i])
+            S_i_union_i = S_i.union({i})
+            S_i_sorted = tuple(sorted(S_i))
+            S_i_union_i_sorted = tuple(sorted(S_i_union_i))
             #############################################################################################
-            raise NotImplementedError("Implement the retrieval of S_i, S_i_union_i, and their sorted tuples.")
-            v_S_i = v_S.get(missing_S_i_sorted, np.nan)
-            v_S_i_union_i = v_S.get(missing_S_i_union_i_sorted, np.nan)
+            #raise NotImplementedError("Implement the retrieval of S_i, S_i_union_i, and their sorted tuples.")
+            v_S_i = v_S.get(S_i_sorted, np.nan)
+            v_S_i_union_i = v_S.get(S_i_union_i_sorted, np.nan)
             if np.isnan(v_S_i) or np.isnan(v_S_i_union_i):
                 valid_permutation = False
                 break
             else:
                 ###############################################################################
                 ###Question 6.1: INSERT CODE HERE: Compute the marginal contribution of step i###
+                Delta_i = v_S_i_union_i - v_S_i #delta_i(π)
+                Delta_sum[i] += Delta_i #Calculates sum of delta_i(π) over all Π (So in compute_shapley_values, only calculate division. Different from equation)
                 ###############################################################################
-                raise NotImplementedError("Implement the computation of the marginal contribution of step i.")
+                #raise NotImplementedError("Implement the computation of the marginal contribution of step i.")
         if valid_permutation:
             valid_permutations_count += 1
     return Delta_sum, valid_permutations_count
@@ -135,9 +141,11 @@ def main():
     ###############################################
     #############################################################
     # Question 7.3: INSERT CODE HERE: Compute the Shapley values#
+    Delta_sum, valid_permutations_count = compute_marginal_contributions(steps, v_S)
+    shapley_values = compute_shapley_values(Delta_sum, valid_permutations_count, steps)
     #############################################################
     #raise NotImplementedError("Implement the code to generate all possible subsets for the missing steps.")
     #raise NotImplementedError("Implement the code to compute v(S).")
-    raise NotImplementedError("Implement the code to compute the Shapley values.")
+    #raise NotImplementedError("Implement the code to compute the Shapley values.")
 if __name__ == "__main__":
     main()
