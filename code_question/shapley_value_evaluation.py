@@ -113,8 +113,11 @@ def compute_shapley_values(Delta_sum, valid_permutations_count, steps):
     """
     ##############################################################
     ###Question 7: INSERT CODE HERE: Compute the Shapley values###
+    shapley_values = {}
+    for i in steps:
+        shapley_values[i] = Delta_sum[i] / valid_permutations_count
     ##############################################################
-    raise NotImplementedError("INSERT CODE HERE: Compute the Shapley values")
+    #raise NotImplementedError("INSERT CODE HERE: Compute the Shapley values")
     return shapley_values
 
 def main():
