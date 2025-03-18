@@ -52,8 +52,12 @@ def compute_v_S(df, all_subsets_missing):
     """
     ##################################################################################
     ###Question 5: INSERT CODE HERE: Compute v(S) for all subsets of missing steps.###
+    v_S = {}
+    for subset in all_subsets_missing:
+        subset_rows = df[df['missing_steps'] == subset] # filter out rows of df, where missing_step of df = subset value (i.e. all the rows with missing_step (1,2))
+        v_S[subset] = subset_rows['is_correct'].mean() # from all the datas that has same missing_step subset, find an average of success for that subset
     ##################################################################################
-    raise NotImplementedError("Implement the code to compute v(S) for all subsets of missing steps.")    
+    #raise NotImplementedError("Implement the code to compute v(S) for all subsets of missing steps.")    
     return v_S
 
 def compute_marginal_contributions(steps, v_S):
