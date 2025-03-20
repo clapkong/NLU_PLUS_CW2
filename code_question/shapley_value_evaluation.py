@@ -83,14 +83,16 @@ def compute_marginal_contributions(steps, v_S):
             idx_i = pi.index(i)
             #############################################################################################
             ###Question 6: INSERT CODE HERE: Retrieve S_i, S_i_union_i, S_i_sorted, S_i_union_i_sorted###
-            S_i = set(pi[:idx_i])
+            S_i = set(pi[:idx_i]) # included set of setps
             S_i_union_i = S_i.union({i})
             S_i_sorted = tuple(sorted(S_i))
             S_i_union_i_sorted = tuple(sorted(S_i_union_i))
+            missing_S_i_sorted = tuple(sorted(set(steps) - set(S_i))) # missing steps
+            missing_S_i_union_i_sorted = tuple(sorted(set(steps) - set(S_i_union_i)))
             #############################################################################################
             #raise NotImplementedError("Implement the retrieval of S_i, S_i_union_i, and their sorted tuples.")
-            v_S_i = v_S.get(S_i_sorted, np.nan)
-            v_S_i_union_i = v_S.get(S_i_union_i_sorted, np.nan)
+            v_S_i = v_S.get(missing_S_i_sorted, np.nan)
+            v_S_i_union_i = v_S.get(missing_S_i_union_i_sorted, np.nan)
             if np.isnan(v_S_i) or np.isnan(v_S_i_union_i):
                 valid_permutation = False
                 break
@@ -143,6 +145,7 @@ def main():
     # Question 7.3: INSERT CODE HERE: Compute the Shapley values#
     Delta_sum, valid_permutations_count = compute_marginal_contributions(steps, v_S)
     shapley_values = compute_shapley_values(Delta_sum, valid_permutations_count, steps)
+    print(shapley_values)
     #############################################################
     #raise NotImplementedError("Implement the code to generate all possible subsets for the missing steps.")
     #raise NotImplementedError("Implement the code to compute v(S).")
